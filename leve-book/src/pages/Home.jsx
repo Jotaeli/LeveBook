@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Header from "components/Header";
 import Footer from "components/Footer";
-import Carousel from 'react-bootstrap/Carousel';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import RegisterCard from "components/RegisterCard";
+
 
 
 // Images
@@ -13,6 +12,7 @@ import sequisermudaromundo from "../images/books/SeQuiserMudaroMundo.jpg";
 import vermelhobrancosangueazul from "../images/books/VermelhoBrancoeSangueAzul.jpg";
 import lupin from "../images/books/lupin.jpg";
 import ladykillers from "../images/books/LadyKillers.png";
+import { useState } from "react";
 
 
 
@@ -246,6 +246,7 @@ const OptionsCarousel = styled.div `
 
 
 export default function Home() {
+    const [openModal, setOpenModal] = useState(false)
 
   return (
     <div>
@@ -289,7 +290,11 @@ export default function Home() {
         <Products>
                 <ProductsTitle>Veja  nossas ofertas</ProductsTitle>
                 <ProductsSubTitle>Não deixe a história acabar. Busque por sua próxima aventura...</ProductsSubTitle>
-                
+
+                <div>
+                    <button onClick={() => setOpenModal(true)}>putaqueopariucaralhoquemaconhaboa</button>
+                </div>
+                <RegisterCard isOpen={openModal}/>
 
                 <BooksOptions>
                     < Options>
