@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Header from "components/Header";
+import HeaderSection from "components/HeaderSection";
 import Footer from "components/Footer";
 import RegisterCard from "components/RegisterCard";
 
@@ -251,42 +252,10 @@ export default function Home() {
   return (
     <div>
       <Header />
-
+      <HeaderSection/>
     <Body>
       <main>
 
-
-        <Carousel data-bs-theme="dark">
-      <Carousel.Item>
-        <HeroIllustration src={mainbanner}
-          className="d-block w-100"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <HeroIllustration src={mainbanner}
-          className="d-block w-100"
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <HeroIllustration src={mainbanner}
-          className="d-block w-100"
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-
-
-
-
-        
         <Products>
                 <ProductsTitle>Veja  nossas ofertas</ProductsTitle>
                 <ProductsSubTitle>Não deixe a história acabar. Busque por sua próxima aventura...</ProductsSubTitle>

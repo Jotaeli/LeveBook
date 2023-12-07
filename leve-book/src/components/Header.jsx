@@ -12,27 +12,12 @@ import {RiShoppingBasket2Line, RiHeartLine, RiUser3Line, RiSearchLine, RiLogoutB
 
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { firebaseApp } from 'firebaseConfig'
+import { auth, firebaseApp } from '../services/firebaseConfig';
 
 
 
-const itensNavHeader = [
-    {
-        nome: 'Favoritos',
-        icone: <RiHeartLine size={22}/>,
-        pathname: '/favoritos'
-    },
-    {
-        nome: 'Entrar',
-        icone: <RiUser3Line size={22}/>,
-        pathname: '/login'
-    },
-    {
-        nome: 'Minha Cesta',
-        icone: <RiShoppingBasket2Line size={22}/>,
-        pathname: '/cesta'
-    }
-]
+
+
 const HeaderBackground = styled.header`
     width: 100%;
     display: flex;
@@ -117,24 +102,29 @@ const SairLink = styled.div`
 `;
 
 export default function Header({setUserDisplayName}) {
-    const userDisplayName = localStorage.getItem("@AuthFirebase:userDisplayName");
-    const auth = getAuth(firebaseApp);
-    const navigate = useNavigate();
 
-    const isAuthenticated = Boolean(userDisplayName);
+  const userDisplayName = localStorage.getItem("@AuthFirebase:userDisplayName");
+  const auth = getAuth(firebaseApp);
+  const navigate = useNavigate();
+  const isAuthenticated = Boolean(userDisplayName);
 
-    // Crie uma cópia da matriz de itens e substitua o objeto "Entrar" pelo nome do usuário
-    const itensNavHeaderAtualizado = [...itensNavHeader];
-    const entrarIndex = itensNavHeaderAtualizado.findIndex(item => item.nome === "Entrar");
-  
-    if (entrarIndex !== -1 && userDisplayName) {
-      itensNavHeaderAtualizado[entrarIndex] = {
-
-        nome: `Olá, ${userDisplayName}`,
-        icone: <RiUser3Line size={22} />,
-        pathname: "/conta"
-      };
+  const itensNavHeader = [
+    {
+        nome: 'Favoritos',
+        icone: <RiHeartLine size={22}/>,
+        pathname: '/favoritos'
+    },
+    {
+        nome: isAuthenticated ? `Olá, ${userDisplayName}` : 'Entrar',
+        icone: <RiUser3Line size={22}/>,
+        pathname: isAuthenticated ? '/conta' : '/login'
+    },
+    {
+        nome: 'Minha Cesta',
+        icone: <RiShoppingBasket2Line size={22}/>,
+        pathname: '/cesta'
     }
+  ]
   
     const handleLogout = () => {
         try {
@@ -168,7 +158,7 @@ export default function Header({setUserDisplayName}) {
               </IconeLupa>
             </FormPesquisa>
             <NavBar>
-              {itensNavHeaderAtualizado.map((item) => (
+              {itensNavHeader.map((item) => (
                 <HeaderLink key={item.pathname} to={item.pathname}>
                   {item.icone}
                   {item.nome}
